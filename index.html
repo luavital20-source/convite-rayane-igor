@@ -411,6 +411,31 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opac
 .pix-box .pix-name{font-family:'Lora',serif;font-size:13px;color:var(--ink-soft);}
 .pix-copy{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:13px;color:var(--wood-deep);border:1.5px solid var(--wood);border-radius:30px;padding:12px 24px;}
 .pix-copy:hover,.pix-copy.copied{background:var(--wood);color:#FFF9EF;border-color:var(--wood);}
+/* confirmação de presença (rústico) */
+.rsvp-box{margin:30px auto 0;max-width:380px;background:rgba(255,250,240,.6);border:1.5px dashed var(--line);border-radius:10px;padding:24px 20px;text-align:center;}
+.rsvp-k{display:block;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--wood);text-indent:.3em;}
+.rsvp-search{display:flex;align-items:center;gap:10px;margin-top:14px;background:#FFFBF4;border:1.5px solid var(--line);border-radius:30px;padding:0 16px;}
+#rsvpFind[hidden]{display:none;}
+.rsvp-search svg{width:17px;height:17px;color:var(--wood);flex-shrink:0;}
+.rsvp-search input{flex:1;min-width:0;border:0;background:transparent;outline:none;font-family:'Lora',serif;font-size:16px;color:var(--ink);padding:13px 0;}
+.rsvp-search:focus-within{border-color:var(--wood);}
+.rsvp-results{list-style:none;margin-top:10px;text-align:left;}
+.rsvp-results button{width:100%;display:flex;flex-direction:column;gap:2px;text-align:left;background:transparent;border:0;border-bottom:1px dotted var(--line);padding:12px 6px;cursor:pointer;font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:600;color:var(--ink);}
+.rsvp-results button:hover{background:rgba(138,106,75,.07);}
+.rsvp-results small{font-family:'Lora',serif;font-size:11.5px;font-weight:400;color:var(--wood);}
+.rsvp-results .vazio{font-size:13px;color:var(--ink-soft);padding:12px 6px;text-align:center;}
+.rsvp-card[hidden]{display:none;}
+.rsvp-titulo{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:21px;line-height:1.25;color:var(--ink);margin-top:10px;}
+.rsvp-sub{font-size:13px;color:var(--ink-soft);margin-top:14px;}
+.rsvp-membros{display:flex;flex-direction:column;gap:8px;margin-top:12px;text-align:left;}
+.rsvp-m{display:flex;align-items:center;gap:12px;padding:11px 14px;background:#FFFBF4;border:1px solid var(--line);border-radius:8px;cursor:pointer;font-size:14.5px;color:var(--ink);}
+.rsvp-m input{width:19px;height:19px;accent-color:var(--blue-deep);flex-shrink:0;}
+.rsvp-acoes{display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:20px;}
+.rsvp-acoes .btn-fill{margin-top:0;white-space:nowrap;padding:15px 26px;letter-spacing:.18em;text-indent:.18em;cursor:pointer;background:var(--blue-deep);border-color:var(--blue-deep);}
+.rsvp-nao,.rsvp-voltar{background:none;border:0;cursor:pointer;font-family:'Lora',serif;font-size:13px;color:var(--wood-deep);text-decoration:underline;text-underline-offset:3px;padding:8px;}
+.rsvp-voltar{text-decoration:none;color:var(--ink-soft);font-size:12.5px;}
+.rsvp-help{font-size:12.5px;color:var(--ink-soft);margin-top:18px;}
+.rsvp-help a{color:var(--blue-deep);text-underline-offset:3px;}
 </style>
 </head>
 <body>
@@ -575,11 +600,35 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opac
       <h2 class="sec-title reveal">Você <span class="it">vem?</span></h2>
       <div class="divider reveal"><span class="ln"></span><span class="dot"></span><span class="ln r"></span></div>
 
-      <p class="rsvp-note reveal d1">Sua presença fará deste dia um momento ainda mais especial. Confirme pelo WhatsApp, com um toque.</p>
-      <a class="btn-fill reveal d2" id="confirmBtn" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.53.15-.18.2-.3.3-.5.1-.2.05-.38-.02-.53-.08-.15-.67-1.62-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.53.07-.8.38-.28.3-1.05 1.03-1.05 2.5s1.08 2.9 1.23 3.1c.15.2 2.12 3.24 5.14 4.54.72.31 1.28.5 1.71.63.72.23 1.38.2 1.9.12.58-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35z"/><path d="M12 2.2c-5.4 0-9.8 4.4-9.8 9.8 0 1.73.45 3.4 1.32 4.88L2.2 21.8l5.05-1.3A9.75 9.75 0 0012 21.8c5.4 0 9.8-4.4 9.8-9.8S17.4 2.2 12 2.2zm0 17.9c-1.6 0-3.16-.43-4.53-1.24l-.32-.19-3.36.86.9-3.28-.21-.34A8.08 8.08 0 013.9 12c0-4.47 3.63-8.1 8.1-8.1s8.1 3.63 8.1 8.1-3.63 8.1-8.1 8.1z"/></svg>
-        Confirmar no WhatsApp
-      </a>
+      <p class="rsvp-note reveal d1">Sua presença fará deste dia um momento ainda mais especial. Procure seu nome na lista e confirme com um toque.</p>
+
+      <div class="rsvp-box reveal d2">
+        <div id="rsvpFind">
+        <label class="rsvp-k" for="rsvpBusca">Digite seu nome</label>
+        <div class="rsvp-search">
+          <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.5"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <input id="rsvpBusca" type="search" autocomplete="off" placeholder="ex.: Tia Jane, Bianca…">
+        </div>
+        <ul class="rsvp-results" id="rsvpResults"></ul>
+        </div>
+
+        <div class="rsvp-card" id="rsvpCard" hidden>
+          <p class="rsvp-k">seu convite</p>
+          <p class="rsvp-titulo" id="rsvpTitulo"></p>
+          <p class="rsvp-sub">Marque quem vai comparecer:</p>
+          <div class="rsvp-membros" id="rsvpMembros"></div>
+          <div class="rsvp-acoes">
+            <button type="button" class="btn-fill" id="rsvpSim">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Confirmar presença
+            </button>
+            <button type="button" class="rsvp-nao" id="rsvpNao">Infelizmente não poderei ir</button>
+            <button type="button" class="rsvp-voltar" id="rsvpVoltar">← procurar outro nome</button>
+          </div>
+        </div>
+
+        <p class="rsvp-help">Não encontrou seu nome? <a id="rsvpAjuda" target="_blank" rel="noopener">Fale com os noivos</a></p>
+      </div>
     </div>
   </section>
 
@@ -622,9 +671,8 @@ const CONFIG = {
   mapCerimonia: 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent('Paróquia São José Operário, Caucaia - CE'),
   mapRecepcao:  'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent('D&D Festas, Rua Oiticicas 03, Arianópolis, Caucaia - CE'),
 
-  // ══ Confirmação de presença — link do WhatsApp (vazio = seção oculta) ══
-  // ex.: 'https://wa.me/5585999999999?text=' + encodeURIComponent('Olá! Gostaria de confirmar minha presença no casamento de Rayane & Igor 💍')
-  confirmacao: '',
+  // ══ Confirmação de presença — WhatsApp que recebe as respostas (DDI+DDD+número) ══
+  whatsapp: '5585991833706',
 
   // ══ Presente via Pix ══
   pixChave:   '85991833706',                 // celular
@@ -635,6 +683,57 @@ const CONFIG = {
   versiculoRef: 'Isaías 41:20',
 };
 
+
+/* ════════════════════════════════════════════════════════════
+   👥  LISTA DE CONVIDADOS — cada linha é um convite.
+   Quem está na mesma linha confirma junto (marido, esposa,
+   namorada, crianças…). Para separar ou juntar pessoas,
+   é só mover os nomes entre as linhas.
+   ════════════════════════════════════════════════════════════ */
+const FAM='Família Abreu + Vitoriano', AMG='Amigos';
+const CONVIDADOS = [
+  { grupo:FAM, nomes:['Mãe'] },
+  { grupo:FAM, nomes:['Pai'] },
+  { grupo:FAM, nomes:['Vó Helena'] },
+  { grupo:FAM, nomes:['Vó Rosa'] },
+  { grupo:FAM, nomes:['Vô Izidio'] },
+  { grupo:FAM, nomes:['Davi (primo)','Rute (namorada do Davi)'] },
+  { grupo:FAM, nomes:['Tio Emídio','Namorada do Tio Emídio'] },
+  { grupo:FAM, nomes:['Tia Ruti'] },
+  { grupo:FAM, nomes:['Rayssa'] },
+  { grupo:FAM, nomes:['Arthur'] },
+  { grupo:FAM, nomes:['Tio Nilton'] },
+  { grupo:FAM, nomes:['Tia Deci','Marido da Tia Deci'] },
+  { grupo:FAM, nomes:['Tia Jane','Marido da Tia Jane'] },
+  { grupo:FAM, nomes:['Geovana'] },
+  { grupo:FAM, nomes:['Tia Eliane'] },
+  { grupo:FAM, nomes:['Tio Neném','Esposa do Tio Neném'] },
+  { grupo:FAM, nomes:['David','Vívian','Clara (criança)','Davi Luís (criança)'] },
+  { grupo:FAM, nomes:['Thaynara','Esposo da Thaynara'] },
+  { grupo:FAM, nomes:['Ene'] },
+  { grupo:FAM, nomes:['Tio Célio'] },
+  { grupo:FAM, nomes:['Julia','Julinha (criança)'] },
+  { grupo:FAM, nomes:['Everton'] },
+  { grupo:FAM, nomes:['Evertania','Marido da Evertania','Maria Helena (criança)'] },
+
+  { grupo:AMG, nomes:['Bianca','Anderson','Nicolas (criança)'] },
+  { grupo:AMG, nomes:['Bell'] },
+  { grupo:AMG, nomes:['Erick'] },
+  { grupo:AMG, nomes:['Joyce','Marido da Joyce'] },
+  { grupo:AMG, nomes:['Giovanna','Marido da Giovanna'] },
+  { grupo:AMG, nomes:['Cris'] },
+  { grupo:AMG, nomes:['Erivan'] },
+  { grupo:AMG, nomes:['Vanessa'] },
+  { grupo:AMG, nomes:['Marcelino'] },
+  { grupo:AMG, nomes:['Bety'] },
+  { grupo:AMG, nomes:['Rafael'] },
+  { grupo:AMG, nomes:['Ana Rosa'] },
+  { grupo:AMG, nomes:['Fernanda','Marido da Fernanda'] },
+  { grupo:AMG, nomes:['Betinha (Unimed)'] },
+  { grupo:AMG, nomes:['Luzanira (Unimed)'] },
+  { grupo:AMG, nomes:['Sterfane','Marido da Sterfane'] },
+  { grupo:AMG, nomes:['Gaby'] },
+];
 
 /* ════════════════════════════════════════════════════════════
    A partir daqui é o funcionamento — não precisa mexer.
@@ -660,7 +759,7 @@ document.querySelectorAll('[data-mono]').forEach(el=>el.innerHTML=document.getEl
 /* oculta blocos sem dados (preencha no CONFIG p/ reexibir) */
 (function(){
   const hide=id=>{const e=document.getElementById(id);if(e)e.style.display='none';};
-  if(!CONFIG.confirmacao) hide('rsvp');
+  if(!CONFIG.whatsapp) hide('rsvp');
 })();
 
 
@@ -742,7 +841,47 @@ document.getElementById('pixCopy').addEventListener('click',async function(){
 });
 
 /* ─── Confirmar presença (WhatsApp) ─── */
-if(CONFIG.confirmacao) document.getElementById('confirmBtn').href = CONFIG.confirmacao;
+(function rsvp(){
+  const wa=msg=>'https://wa.me/'+CONFIG.whatsapp+'?text='+encodeURIComponent(msg);
+  const norm=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+  const titulo=c=>c.nomes.length===1?c.nomes[0]:c.nomes.slice(0,-1).join(', ')+' e '+c.nomes[c.nomes.length-1];
+  const busca=document.getElementById('rsvpBusca'), lista=document.getElementById('rsvpResults');
+  const card=document.getElementById('rsvpCard'), membros=document.getElementById('rsvpMembros');
+  let atual=null;
+  document.getElementById('rsvpAjuda').href=wa('Olá! Recebi o convite do casamento de '+CONFIG.noivos+' 💍, mas não encontrei meu nome na lista. Meu nome é: ');
+
+  function render(){
+    const q=norm(busca.value.trim());
+    if(q.length<2){lista.innerHTML='';return;}
+    const achados=CONVIDADOS.filter(c=>c.nomes.some(n=>norm(n).includes(q))).slice(0,8);
+    lista.innerHTML=achados.length
+      ? achados.map(c=>`<li><button type="button" data-i="${CONVIDADOS.indexOf(c)}"><span>${titulo(c)}</span><small>${c.grupo}</small></button></li>`).join('')
+      : '<li class="vazio">Nenhum nome encontrado. Tente só o primeiro nome.</li>';
+  }
+  busca.addEventListener('input',render);
+  lista.addEventListener('click',e=>{
+    const b=e.target.closest('button[data-i]'); if(!b) return;
+    atual=CONVIDADOS[+b.dataset.i];
+    document.getElementById('rsvpTitulo').textContent=titulo(atual);
+    membros.innerHTML=atual.nomes.map((n,i)=>`<label class="rsvp-m"><input type="checkbox" checked data-n="${i}"><span>${n}</span></label>`).join('');
+    lista.innerHTML=''; document.getElementById('rsvpFind').hidden=true; card.hidden=false;
+  });
+  document.getElementById('rsvpVoltar').addEventListener('click',()=>{
+    card.hidden=true; document.getElementById('rsvpFind').hidden=false; busca.value=''; busca.focus();
+  });
+  document.getElementById('rsvpSim').addEventListener('click',()=>{
+    const vao=[...membros.querySelectorAll('input:checked')].map(i=>atual.nomes[+i.dataset.n]);
+    if(!vao.length){alert('Marque pelo menos uma pessoa — ou toque em “Infelizmente não poderei ir”.');return;}
+    const naoVao=atual.nomes.filter(n=>!vao.includes(n));
+    let m='Olá! Confirmo presença no casamento de '+CONFIG.noivos+' 💍\n\nConvite: '+titulo(atual)+
+      '\nVão comparecer ('+vao.length+'): '+vao.join(', ');
+    if(naoVao.length) m+='\nNão poderão ir: '+naoVao.join(', ');
+    window.open(wa(m),'_blank');
+  });
+  document.getElementById('rsvpNao').addEventListener('click',()=>{
+    window.open(wa('Olá! Infelizmente não poderemos comparecer ao casamento de '+CONFIG.noivos+'. Desejamos muitas felicidades! 💙\n\nConvite: '+titulo(atual)),'_blank');
+  });
+})();
 
 </script>
 </body>
