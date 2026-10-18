@@ -436,6 +436,10 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opac
 .rsvp-voltar{text-decoration:none;color:var(--ink-soft);font-size:12.5px;}
 .rsvp-help{font-size:12.5px;color:var(--ink-soft);margin-top:18px;}
 .rsvp-help a{color:var(--blue-deep);text-underline-offset:3px;}
+.rsvp-qtd{display:flex;align-items:center;justify-content:center;gap:22px;margin-top:4px;}
+.rsvp-qtd button{width:46px;height:46px;border-radius:50%;border:1.5px solid var(--wood);background:#FFFBF4;color:var(--wood-deep);font-size:24px;line-height:1;cursor:pointer;}
+.rsvp-qtd button:hover{background:var(--wood);color:#FFF9EF;}
+.rsvp-qtd output{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:38px;color:var(--ink);min-width:44px;text-align:center;}
 </style>
 </head>
 <body>
@@ -615,7 +619,7 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opac
         <div class="rsvp-card" id="rsvpCard" hidden>
           <p class="rsvp-k">seu convite</p>
           <p class="rsvp-titulo" id="rsvpTitulo"></p>
-          <p class="rsvp-sub">Marque quem vai comparecer:</p>
+          <p class="rsvp-sub" id="rsvpSub">Marque quem vai comparecer:</p>
           <div class="rsvp-membros" id="rsvpMembros"></div>
           <div class="rsvp-acoes">
             <button type="button" class="btn-fill" id="rsvpSim">
@@ -689,6 +693,7 @@ const CONFIG = {
    Quem está na mesma linha confirma junto (marido, esposa,
    namorada, crianças…). Para separar ou juntar pessoas,
    é só mover os nomes entre as linhas.
+   familia:true → o convidado informa quantas pessoas vão.
    ════════════════════════════════════════════════════════════ */
 const FAM='Família Abreu + Vitoriano', AMG='Amigos';
 const CONVIDADOS = [
@@ -733,6 +738,100 @@ const CONVIDADOS = [
   { grupo:AMG, nomes:['Luzanira (Unimed)'] },
   { grupo:AMG, nomes:['Sterfane','Marido da Sterfane'] },
   { grupo:AMG, nomes:['Gaby'] },
+
+  // ── segunda lista ──
+  { grupo:'Família', nomes:['Afonso'] },
+  { grupo:'Família', nomes:['Francisca'] },
+  { grupo:'Família', nomes:['Italo'] },
+  { grupo:'Família', nomes:['Isadora'] },
+  { grupo:'Família', nomes:['Regina'] },
+  { grupo:'Família', nomes:['André'] },
+  { grupo:'Família', nomes:['Cintia'] },
+  { grupo:'Família', nomes:['Cibele'] },
+  { grupo:'Família', nomes:['Fabrício'] },
+  { grupo:'Família', nomes:['Cicero'] },
+  { grupo:'Família', nomes:['Arnaldo'] },
+  { grupo:'Família', nomes:['Diego'] },
+  { grupo:'Família', nomes:['Josy'] },
+  { grupo:'Família', nomes:['Isaque'] },
+  { grupo:'Família', nomes:['Maria'] },
+  { grupo:'Família', nomes:['Rogério'] },
+  { grupo:'Família', nomes:['Mateus'] },
+  { grupo:'Família', nomes:['Luana'] },
+  { grupo:'Família', nomes:['Ticó'] },
+  { grupo:'Família', nomes:['Maria das Graças'] },
+  { grupo:'Família', nomes:['Luan'] },
+  { grupo:'Família', nomes:['Luiza'] },
+  { grupo:'Família', nomes:['Ana Lúcia'] },
+  { grupo:'Família', nomes:['José Coelho'] },
+  { grupo:'Família', nomes:['Amor'] },
+  { grupo:'Família', nomes:['Teresa'] },
+  { grupo:'Família', nomes:['Emanuel'] },
+  { grupo:'Família', nomes:['Lucas'] },
+  { grupo:'Família', nomes:['Vavá'] },
+  { grupo:'Família', nomes:['Cicera'] },
+  { grupo:'Família', nomes:['Samille'] },
+  { grupo:'Família', nomes:['Vitoria'] },
+  { grupo:'Família', nomes:['Jonatan'] },
+  { grupo:'Família', nomes:['Alzenira'] },
+  { grupo:'Família', nomes:['Maria Luiza'] },
+  { grupo:'Família', nomes:['Anderson'] },
+  { grupo:'Família', nomes:['Avila'] },
+  { grupo:'Família', nomes:['Erik'] },
+  { grupo:'Família', nomes:['Cecilia'] },
+  { grupo:'Família', nomes:['Caio'] },
+  { grupo:'Família', nomes:['Joana'] },
+  { grupo:'Família', nomes:['Carmem'] },
+  { grupo:'Família', nomes:['Alzir'] },
+  { grupo:'Família', nomes:['Rita e família'], familia:true },
+  { grupo:'Família', nomes:['César'] },
+  { grupo:'Família', nomes:['Tiago'] },
+  { grupo:'Família', nomes:['Horário'] },
+  { grupo:'Família', nomes:['Mirele'] },
+  { grupo:'Família', nomes:['Mikaele e família'], familia:true },
+  { grupo:'Família', nomes:['Ana Nere'] },
+  { grupo:'Família', nomes:['Aldivan'] },
+  { grupo:'Família', nomes:['Samuel','Namorada do Samuel'] },
+  { grupo:'Família', nomes:['Sabrina e família'], familia:true },
+  { grupo:'Família', nomes:['Dé e família'], familia:true },
+  { grupo:'Família', nomes:['Geraldo e família'], familia:true },
+  { grupo:'Família', nomes:['Luciana','Esposo da Luciana'] },
+  { grupo:'Família', nomes:['Rita (Ritinha)'] },
+  { grupo:'Família', nomes:['Rafael e família'], familia:true },
+  { grupo:'Família', nomes:['Zé Cláudio e família'], familia:true },
+  { grupo:'Família', nomes:['Paulo José e família'], familia:true },
+  { grupo:'Família', nomes:['Ana Gloria e família'], familia:true },
+  { grupo:'Família', nomes:['Anderson e família'], familia:true },
+  { grupo:'Família', nomes:['Joana Coelho','Emanuel'] },
+  { grupo:'Vizinhos', nomes:['Reginilce e família'], familia:true },
+  { grupo:'Vizinhos', nomes:['Graça'] },
+  { grupo:'Vizinhos', nomes:['Hugo','Namorada do Hugo'] },
+  { grupo:'Vizinhos', nomes:['Luciele e família'], familia:true },
+  { grupo:'Vizinhos', nomes:['Karol','Namorado da Karol'] },
+  { grupo:'Amigos', nomes:['Henrique'] },
+  { grupo:'Amigos', nomes:['Alison'] },
+  { grupo:'Amigos', nomes:['Sarah'] },
+  { grupo:'Amigos', nomes:['Junim'] },
+  { grupo:'Amigos', nomes:['Cida'] },
+  { grupo:'Amigos', nomes:['Rimelber'] },
+  { grupo:'Amigos', nomes:['Mateus'] },
+  { grupo:'Amigos', nomes:['Vanessa'] },
+  { grupo:'Amigos', nomes:['Rodrigo e família'], familia:true },
+  { grupo:'Amigos', nomes:['Marcella'] },
+  { grupo:'Amigos', nomes:['Iara'] },
+  { grupo:'Amigos', nomes:['Lana'] },
+  { grupo:'Amigos', nomes:['Livia e família'], familia:true },
+  { grupo:'Amigos', nomes:['Robson e família'], familia:true },
+  { grupo:'Amigos', nomes:['Pedro','Namorado do Pedro'] },
+  { grupo:'Amigos', nomes:['Daniel'] },
+  { grupo:'Amigos', nomes:['Lucas Holanda','Namorado do Lucas Holanda'] },
+  { grupo:'Amigos', nomes:['Alexandra'] },
+  { grupo:'Amigos', nomes:['Felipe e família'], familia:true },
+  { grupo:'Amigos', nomes:['Janaina'] },
+  { grupo:'Amigos', nomes:['Cecilia'] },
+  { grupo:'Amigos', nomes:['Harley'] },
+  { grupo:'Amigos', nomes:['Julio e família'], familia:true },
+  { grupo:'Amigos', nomes:['Eduarda e família'], familia:true },
 ];
 
 /* ════════════════════════════════════════════════════════════
@@ -853,7 +952,7 @@ document.getElementById('pixCopy').addEventListener('click',async function(){
   function render(){
     const q=norm(busca.value.trim());
     if(q.length<2){lista.innerHTML='';return;}
-    const achados=CONVIDADOS.filter(c=>c.nomes.some(n=>norm(n).includes(q))).slice(0,8);
+    const achados=CONVIDADOS.filter(c=>c.nomes.some(n=>norm(n).includes(q))).slice(0,12);
     lista.innerHTML=achados.length
       ? achados.map(c=>`<li><button type="button" data-i="${CONVIDADOS.indexOf(c)}"><span>${titulo(c)}</span><small>${c.grupo}</small></button></li>`).join('')
       : '<li class="vazio">Nenhum nome encontrado. Tente só o primeiro nome.</li>';
@@ -863,13 +962,25 @@ document.getElementById('pixCopy').addEventListener('click',async function(){
     const b=e.target.closest('button[data-i]'); if(!b) return;
     atual=CONVIDADOS[+b.dataset.i];
     document.getElementById('rsvpTitulo').textContent=titulo(atual);
-    membros.innerHTML=atual.nomes.map((n,i)=>`<label class="rsvp-m"><input type="checkbox" checked data-n="${i}"><span>${n}</span></label>`).join('');
+    document.getElementById('rsvpSub').textContent=atual.familia?'Quantas pessoas vão comparecer (contando você)?':'Marque quem vai comparecer:';
+    membros.innerHTML=atual.familia
+      ? `<div class="rsvp-qtd"><button type="button" data-d="-1" aria-label="Menos">−</button><output id="rsvpQtd">2</output><button type="button" data-d="1" aria-label="Mais">+</button></div>`
+      : atual.nomes.map((n,i)=>`<label class="rsvp-m"><input type="checkbox" checked data-n="${i}"><span>${n}</span></label>`).join('');
     lista.innerHTML=''; document.getElementById('rsvpFind').hidden=true; card.hidden=false;
   });
   document.getElementById('rsvpVoltar').addEventListener('click',()=>{
     card.hidden=true; document.getElementById('rsvpFind').hidden=false; busca.value=''; busca.focus();
   });
+  membros.addEventListener('click',e=>{
+    const b=e.target.closest('button[data-d]'); if(!b) return;
+    const o=document.getElementById('rsvpQtd'); o.textContent=Math.min(20,Math.max(1,+o.textContent+ +b.dataset.d));
+  });
   document.getElementById('rsvpSim').addEventListener('click',()=>{
+    if(atual.familia){
+      const q=+document.getElementById('rsvpQtd').textContent;
+      window.open(wa('Olá! Confirmo presença no casamento de '+CONFIG.noivos+' 💍\n\nConvite: '+titulo(atual)+'\nVão comparecer: '+q+(q>1?' pessoas':' pessoa')),'_blank');
+      return;
+    }
     const vao=[...membros.querySelectorAll('input:checked')].map(i=>atual.nomes[+i.dataset.n]);
     if(!vao.length){alert('Marque pelo menos uma pessoa — ou toque em “Infelizmente não poderei ir”.');return;}
     const naoVao=atual.nomes.filter(n=>!vao.includes(n));
