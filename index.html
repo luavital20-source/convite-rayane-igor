@@ -440,6 +440,11 @@ body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opac
 .rsvp-qtd button{width:46px;height:46px;border-radius:50%;border:1.5px solid var(--wood);background:#FFFBF4;color:var(--wood-deep);font-size:24px;line-height:1;cursor:pointer;}
 .rsvp-qtd button:hover{background:var(--wood);color:#FFF9EF;}
 .rsvp-qtd output{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:38px;color:var(--ink);min-width:44px;text-align:center;}
+/* Great Vibes desenha o "e" final além da caixa do texto; com animação, o iPhone corta essa parte.
+   A folga lateral (padding) amplia a área desenhada sem mudar o alinhamento. */
+.splash-names,.hero-names,.footer-names{padding:0 .22em;overflow:visible;}
+.sec-title .it,.place-time,.dress-main,.footer-names .amp{display:inline-block;padding:0 .14em;}
+.place-time,.dress-main{display:block;}
 </style>
 </head>
 <body>
